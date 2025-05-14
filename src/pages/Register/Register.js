@@ -13,7 +13,7 @@ const Register = () => {
           <input
             type="text"
             name="displayName"
-            requiredS
+            required
             placeholder="Nome do usuário"
           />
         </label>
