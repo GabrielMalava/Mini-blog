@@ -1,43 +1,42 @@
 import { useAuthentication } from "../../hooks/useAuthentication";
 import styles from "./Register.module.css";
 
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 
 const Register = () => {
-const[displayName, setDisplayname] = useState("")
-const[email, setEmail] = useState("")
-const[password, setPassword] = useState("")
-const[confirmPassword, setConfirmPassord] = useState("")
-const[error, setError] = useState("")
+  const [displayName, setDisplayname] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassord] = useState("");
+  const [error, setError] = useState("");
 
-const {createUser, error: authError, loading} = useAuthentication();
+  const { createUser, error: authError, loading } = useAuthentication();
 
-const handleSubmit = async (e) =>{
-  e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  setError("")
+    setError("");
 
-  const user ={
-    displayName,
-    email,
-    password,
-  }
-  if(password !== confirmPassword) {
-    setError("As senhas precisam ser iguais!");
-    return;
-  }
+    const user = {
+      displayName,
+      email,
+      password,
+    };
+    if (password !== confirmPassword) {
+      setError("As senhas precisam ser iguais!");
+      return;
+    }
 
-  const res = await createUser(user)
+    const res = await createUser(user);
 
-  console.log(res);
+    console.log(res);
+  };
 
-};
-
-useEffect(() => {
-  if (authError) {
-    setError(authError);
-  }
-}, [authError])
+  useEffect(() => {
+    if (authError) {
+      setError(authError);
+    }
+  }, [authError]);
 
   return (
     <div className={styles.register}>
@@ -62,7 +61,7 @@ useEffect(() => {
             name="email"
             required
             placeholder="E-mail do usuário"
-                        value={email}
+            value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
         </label>
@@ -88,9 +87,13 @@ useEffect(() => {
             onChange={(e) => setConfirmPassord(e.target.value)}
           />
         </label>
-      {! loading &&<button className="btn">Cadastrar</button>}
-      { loading &&<button className="btn" disabled>Aguarde...</button>}
-      {error && <p className="error">{error} </p>}
+        {!loading && <button className="btn">Cadastrar</button>}
+        {loading && (
+          <button className="btn" disabled>
+            Aguarde...
+          </button>
+        )}
+        {error && <p className="error">{error} </p>}
       </form>
     </div>
   );
