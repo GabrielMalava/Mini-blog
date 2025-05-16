@@ -1,4 +1,4 @@
-import{db} from "../firebase/config";
+import { db } from "../firebase/config";
 
 import {
   getAuth,
@@ -42,26 +42,24 @@ export const useAuthentication = () => {
       await updateProfile(user, {
         displayName: data.displayName,
       });
-        setLoading(false);
+      setLoading(false);
 
       return user;
     } catch (error) {
       console.log(error.message);
       console.log(typeof error.message);
-        let systemErrorMessage
+      let systemErrorMessage;
 
-        if(error.massage.includes("Password")) {
-            systemErrorMessage = "A senha precisa conter pelo menos 6 caracteres."
-        } else if(error.message.includes("email-already")) {
-            systemErrorMessage = "E-mail já cadastrado."
-        } else {
-            systemErrorMessage ="Ocorreu erro, tente mais tarde"
-        }
-        setLoading(false);
-        setError(systemErrorMessage)
+      if (error.massage.includes("Password")) {
+        systemErrorMessage = "A senha precisa conter pelo menos 6 caracteres.";
+      } else if (error.message.includes("email-already")) {
+        systemErrorMessage = "E-mail já cadastrado.";
+      } else {
+        systemErrorMessage = "Ocorreu erro, tente mais tarde";
+      }
+      setLoading(false);
+      setError(systemErrorMessage);
     }
-
-
   };
   useEffect(() => {
     return () => setCancelled(true);
