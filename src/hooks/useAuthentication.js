@@ -1,4 +1,4 @@
-import { db } from "../firebase/config";
+import { db } from '../firebase/config';
 
 import {
   getAuth,
@@ -6,10 +6,10 @@ import {
   signInWithEmailAndPassword,
   updateProfile,
   signOut,
-} from "firebase/auth";
-import firebase from "firebase/compat/app";
+} from 'firebase/auth';
+import firebase from 'firebase/compat/app';
 
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
 export const useAuthentication = () => {
   const [error, setError] = useState(null);
@@ -36,7 +36,7 @@ export const useAuthentication = () => {
       const { user } = await createUserWithEmailAndPassword(
         auth,
         data.email,
-        data.password
+        data.password,
       );
 
       await updateProfile(user, {
@@ -50,16 +50,22 @@ export const useAuthentication = () => {
       console.log(typeof error.message);
       let systemErrorMessage;
 
-      if (error.massage.includes("Password")) {
-        systemErrorMessage = "A senha precisa conter pelo menos 6 caracteres.";
-      } else if (error.message.includes("email-already")) {
-        systemErrorMessage = "E-mail já cadastrado.";
+      if (error.massage.includes('Password')) {
+        systemErrorMessage = 'A senha precisa conter pelo menos 6 caracteres.';
+      } else if (error.message.includes('email-already')) {
+        systemErrorMessage = 'E-mail já cadastrado.';
       } else {
-        systemErrorMessage = "Ocorreu erro, tente mais tarde";
+        systemErrorMessage = 'Ocorreu erro, tente mais tarde';
       }
       setLoading(false);
       setError(systemErrorMessage);
     }
+  };
+
+  //logout
+  const logout = () => {
+    checkIfIsCancelled();
+    signOut(auth);
   };
   useEffect(() => {
     return () => setCancelled(true);
@@ -69,5 +75,6 @@ export const useAuthentication = () => {
     createUser,
     error,
     loading,
+    logout,
   };
 };
