@@ -36,7 +36,7 @@ export const useAuthentication = () => {
       const { user } = await createUserWithEmailAndPassword(
         auth,
         data.email,
-        data.password,
+        data.password
       );
 
       await updateProfile(user, {
@@ -70,6 +70,10 @@ export const useAuthentication = () => {
   useEffect(() => {
     return () => setCancelled(true);
   }, []);
+
+  //login - sing in
+  const login = async () => {};
+
   return {
     auth,
     createUser,
