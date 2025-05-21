@@ -1,21 +1,21 @@
-import { useAuthentication } from "../../hooks/useAuthentication";
-import styles from "./Register.module.css";
+import { useAuthentication } from '../../hooks/useAuthentication';
+import styles from './Register.module.css';
 
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
 const Register = () => {
-  const [displayName, setDisplayname] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassord] = useState("");
-  const [error, setError] = useState("");
+  const [displayName, setDisplayname] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassord] = useState('');
+  const [error, setError] = useState('');
 
   const { createUser, error: authError, loading } = useAuthentication();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    setError("");
+    setError('');
 
     const user = {
       displayName,
@@ -23,7 +23,7 @@ const Register = () => {
       password,
     };
     if (password !== confirmPassword) {
-      setError("As senhas precisam ser iguais!");
+      setError('As senhas precisam ser iguais!');
       return;
     }
 
