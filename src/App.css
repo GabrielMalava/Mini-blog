@@ -2,3 +2,35 @@
   min-height: 60vh;
   margin-bottom: 5em;
 }
+
+.btn {
+  background-color: #1a8918;
+  color: #fff;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 10px;
+  width: 120px;
+  font-weight: bold;
+  border: none;
+  padding: 10px 15px;
+  font-size: 1em;
+}
+
+.btn:hover {
+  background-color: #0f730c;
+  color: #fff;
+}
+
+.btn:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
+
+.error {
+  color: #721c24;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  padding: 5px;
+  border-radius: 5px;
+  margin: 10px 0;
+}

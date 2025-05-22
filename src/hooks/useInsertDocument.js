@@ -1,6 +1,6 @@
-import { useState, useEffect, useReducer } from 'react';
-import { db } from '../firebase/config';
-import { collection, addDoc, Timestamp } from 'firebase/firestore';
+import { useState, useEffect, useReducer } from "react";
+import { db } from "../firebase/config";
+import { collection, addDoc, Timestamp } from "firebase/firestore";
 
 const initialState = {
   loading: null,
@@ -9,11 +9,11 @@ const initialState = {
 
 const insertReducer = (state, action) => {
   switch (action.type) {
-    case 'LOADING':
+    case "LOADING":
       return { loading: true, error: null };
-    case 'INSERTED_DOC':
+    case "INSERTED_DOC":
       return { loading: false, error: null };
-    case 'ERROR':
+    case "ERROR":
       return { loading: false, error: action.payload };
     default:
       return state;
@@ -34,7 +34,7 @@ export const useInsertDocument = (docCollection) => {
 
   const insertDocument = async (document) => {
     checkCancelBeforeDispatch({
-      type: 'LOADING',
+      type: "LOADING",
       payload: insertDocument,
     });
 
@@ -46,12 +46,12 @@ export const useInsertDocument = (docCollection) => {
         newDocument
       );
       checkCancelBeforeDispatch({
-        type: 'INSERTED_DOCUMENT',
+        type: "INSERTED_DOCUMENT",
         payload: insertDocument,
       });
     } catch (error) {
       checkCancelBeforeDispatch({
-        type: 'ERROR',
+        type: "ERROR",
         payload: insertDocument,
       });
     }
