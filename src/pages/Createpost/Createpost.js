@@ -45,7 +45,7 @@ const Createpost = () => {
     if (!title || !tags || !body) {
       setFormError("Por favor, preencha todos os campos!");
       return;
-    }    // Criar o array de tags antes de enviar
+    } // Criar o array de tags antes de enviar
     const tagsArray = tags.split(",").map((tag) => tag.trim().toLowerCase());
 
     // Use a primeira imagem como imagem principal e as demais como adicionais
@@ -56,7 +56,7 @@ const Createpost = () => {
       image: mainImage,
       additionalImages,
       body,
-      tags: tagsArray,  // Corrigido: agora é 'tags' em vez de 'tagsArray'
+      tags: tagsArray, // Corrigido: agora é 'tags' em vez de 'tagsArray'
       uid: user.uid,
       createdBy: user.displayName,
     });

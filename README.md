@@ -5,12 +5,14 @@ Uma plataforma moderna de blog construída com React e Firebase, oferecendo uma 
 ## ✨ Funcionalidades
 
 ### 📱 Para Usuários
+
 - **Sistema de Autenticação**
   - Registro de conta
   - Login/Logout
   - Dashboard personalizado
 
 ### 📝 Gerenciamento de Posts
+
 - Criação de posts com suporte a:
   - Múltiplas imagens (carrossel)
   - Tags personalizadas
@@ -18,7 +20,9 @@ Uma plataforma moderna de blog construída com React e Firebase, oferecendo uma 
   - Tempo estimado de leitura (calculado automaticamente)
 
 ### ❤️ Interação
+
 - **Sistema de Favoritos**
+
   - Marcar/desmarcar posts como favoritos
   - Página dedicada para posts favoritos
   - Persistência local dos favoritos
@@ -28,6 +32,7 @@ Uma plataforma moderna de blog construída com React e Firebase, oferecendo uma 
   - Persistência local das avaliações
 
 ### 🔍 Busca e Filtros
+
 - **Filtros Avançados**
   - Filtrar por tags
   - Filtrar por data (hoje, semana, mês, ano)
@@ -35,6 +40,7 @@ Uma plataforma moderna de blog construída com React e Firebase, oferecendo uma 
   - Busca por palavras-chave
 
 ### 🎨 Interface
+
 - Design responsivo
 - Layout em grid moderno
 - Carrossel de imagens
@@ -120,18 +126,20 @@ const firebaseConfig = {
   projectId: "seu-project-id",
   storageBucket: "seu-storage-bucket",
   messagingSenderId: "seu-messaging-sender-id",
-  appId: "seu-app-id"
+  appId: "seu-app-id",
 };
 ```
 
 ## 📱 Uso
 
 1. **Criar uma conta**
+
    - Acesse a página de registro
    - Preencha suas informações
    - Faça login
 
 2. **Criar Posts**
+
    - Acesse "Criar Post"
    - Adicione título, conteúdo e imagens
    - Use vírgulas para separar tags

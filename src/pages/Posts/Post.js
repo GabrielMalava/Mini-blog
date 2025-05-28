@@ -1,9 +1,11 @@
 import styles from "./Post.module.css";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useFetchDocuments } from "../../hooks/useFetchDocuments";
 import { useState, useEffect } from "react";
 import StarRating from "../../components/StarRating/StarRating";
 import FavoriteButton from "../../components/FavoriteButton/FavoriteButton";
+import { useAuthValue } from "../../context/AuthContext";
+import { useDeleteDocument } from "../../hooks/useDeleteDocument";
 // Import Swiper components
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
@@ -20,6 +22,9 @@ const Post = () => {
   const [rating, setRating] = useState(0);
   const [isFavorite, setIsFavorite] = useState(false);
   const [readingTime, setReadingTime] = useState(0);
+  const { user } = useAuthValue();
+  const { deleteDocument } = useDeleteDocument("posts");
+  const navigate = useNavigate();
   // Efeito para carregar rating e favoritos
   useEffect(() => {
     // Recuperar rating do localStorage
@@ -57,6 +62,11 @@ const Post = () => {
 
     // Disparar evento customizado para notificar mudanças
     window.dispatchEvent(new Event("favoritesChanged"));
+  };
+
+  const handleDelete = () => {
+    deleteDocument(post.id);
+    navigate("/");
   };
 
   return (
@@ -153,6 +163,16 @@ const Post = () => {
               </button>
             </div>
           </div>
+          {user && user.uid === post.createdBy && (
+            <div className={styles.admin_section}>
+              <button
+                className={styles.delete_button}
+                onClick={handleDelete}
+              >
+                Deletar Post
+              </button>
+            </div>
+          )}
         </>
       )}
     </div>
