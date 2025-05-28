@@ -6,11 +6,8 @@ import StarRating from "../../components/StarRating/StarRating";
 import FavoriteButton from "../../components/FavoriteButton/FavoriteButton";
 import { useAuthValue } from "../../context/AuthContext";
 import { useDeleteDocument } from "../../hooks/useDeleteDocument";
-// Import Swiper components
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
-
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -32,16 +29,12 @@ const Post = () => {
       navigate("/");
     }
   };
-
-  // Efeito para carregar rating e favoritos
   useEffect(() => {
-    // Recuperar rating do localStorage
     const savedRating = localStorage.getItem(`rating_${id}`);
     if (savedRating) {
       setRating(parseInt(savedRating));
     }
 
-    // Recuperar estado de favorito
     const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
     setIsFavorite(favorites.includes(id));
   }, [id]);

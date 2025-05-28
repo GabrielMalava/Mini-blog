@@ -19,8 +19,6 @@ const Createpost = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setFormError("");
-
-    // Parse and validate image URLs
     const imageUrls = images
       .split(",")
       .map((url) => url.trim())
@@ -30,8 +28,6 @@ const Createpost = () => {
       setFormError("Insira pelo menos uma URL de imagem.");
       return;
     }
-
-    // Validate each image URL
     for (const url of imageUrls) {
       try {
         new URL(url);
@@ -40,15 +36,11 @@ const Createpost = () => {
         return;
       }
     }
-
-    // checar todos os valores
     if (!title || !tags || !body) {
       setFormError("Por favor, preencha todos os campos!");
       return;
-    } // Criar o array de tags antes de enviar
+    }
     const tagsArray = tags.split(",").map((tag) => tag.trim().toLowerCase());
-
-    // Use a primeira imagem como imagem principal e as demais como adicionais
     const [mainImage, ...additionalImages] = imageUrls;
 
     insertDocument({
@@ -56,12 +48,10 @@ const Createpost = () => {
       image: mainImage,
       additionalImages,
       body,
-      tags: tagsArray, // Corrigido: agora é 'tags' em vez de 'tagsArray'
+      tags: tagsArray,
       uid: user.uid,
       createdBy: user.displayName,
     });
-
-    //redirect to home page
     navigate("/");
   };
 
