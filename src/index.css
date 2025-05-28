@@ -113,6 +113,8 @@ textarea::placeholder {
   text-transform: uppercase;
   letter-spacing: 0.5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
 }
 
 .btn.btn-dark {
@@ -129,12 +131,14 @@ textarea::placeholder {
 }
 
 .btn:hover {
-  background-color: #0f730c;
-  color: #fff;
+  background-color: var(--secondary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .btn.btn-outline:hover {
-  background-color: #000;
+  background-color: var(--primary-color);
+  color: #fff;
 }
 
 .btn.btn-danger:hover {
