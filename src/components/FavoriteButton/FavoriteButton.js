@@ -1,54 +1,29 @@
-import { useState, useEffect } from "react";
+import { useAuthValue } from "../../context/AuthContext";
+import { useFavorites } from "../../hooks/useFavorites";
 import styles from "./FavoriteButton.module.css";
 
-const FavoriteButton = ({ initialState = false, onToggle, postId }) => {
-  const [isFavorite, setIsFavorite] = useState(initialState);
+const FavoriteButton = ({ postId }) => {
+  const { user } = useAuthValue();
+  const { isFavorite, addFavorite, removeFavorite } = useFavorites(user?.uid);
 
-  useEffect(() => {
-    // Sincronizar com localStorage ao montar e quando postId mudar
-    const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-    setIsFavorite(favorites.includes(postId));
+  const handleToggle = async () => {
+    if (!user) return;
 
-    // Listener para mudanças no localStorage
-    const handleStorageChange = (e) => {
-      if (e.key === "favorites") {
-        const updatedFavorites = JSON.parse(e.newValue) || [];
-        setIsFavorite(updatedFavorites.includes(postId));
-      }
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-
-    return () => {
-      window.removeEventListener("storage", handleStorageChange);
-    };
-  }, [postId]);
-  const handleToggle = () => {
-    const newFavoriteState = !isFavorite;
-    setIsFavorite(newFavoriteState);
-
-    if (onToggle) {
-      onToggle(postId, newFavoriteState);
+    if (isFavorite(postId)) {
+      await removeFavorite(postId);
+    } else {
+      await addFavorite(postId);
     }
-
-    // Atualizar localStorage diretamente
-    const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-    const newFavorites = newFavoriteState
-      ? [...favorites, postId]
-      : favorites.filter((id) => id !== postId);
-
-    localStorage.setItem("favorites", JSON.stringify(newFavorites));
-
-    // Disparar evento de atualização
-    window.dispatchEvent(new Event("favoritesChanged"));
   };
+
+  if (!user) return null;
 
   return (
     <button
-      className={`${styles.favorite_btn} ${isFavorite ? styles.active : ""}`}
+      className={`${styles.favorite_btn} ${isFavorite(postId) ? styles.active : ""}`}
       onClick={handleToggle}
       aria-label={
-        isFavorite ? "Remove dos favoritos" : "Adicionar aos favoritos"
+        isFavorite(postId) ? "Remove dos favoritos" : "Adicionar aos favoritos"
       }
     >
       <svg

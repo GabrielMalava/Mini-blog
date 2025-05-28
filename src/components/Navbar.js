@@ -24,14 +24,16 @@ const Navbar = () => {
             Home
           </NavLink>
         </li>
-        <li>
-          <NavLink
-            to="/favorites"
-            className={({ isActive }) => (isActive ? styles.active : "")}
-          >
-            Favoritos
-          </NavLink>
-        </li>
+        {user && (
+          <li>
+            <NavLink
+              to="/favorites"
+              className={({ isActive }) => (isActive ? styles.active : "")}
+            >
+              Favoritos
+            </NavLink>
+          </li>
+        )}
         {!user && (
           <>
             <li>

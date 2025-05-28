@@ -50,7 +50,10 @@ function App() {
               <Route path="/about" element={<About />} />
               <Route path="/search" element={<Search />} />
               <Route path="/posts/:id" element={<Post />} />
-              <Route path="/favorites" element={<Favorites />} />
+              <Route
+                path="/favorites"
+                element={user ? <Favorites /> : <Navigate to="/login" />}
+              />
               <Route
                 path="/login"
                 element={!user ? <Login /> : <Navigate to="/" />}
