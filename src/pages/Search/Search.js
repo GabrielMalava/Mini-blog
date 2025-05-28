@@ -7,6 +7,8 @@ import { useQuery } from "../../hooks/useQuery";
 // components
 import PostDetail from "../../components/PostDetail";
 import { Link } from "react-router-dom";
+import StarRating from "../../components/StarRating/StarRating";
+import FavoriteButton from "../../components/FavoriteButton/FavoriteButton";
 
 const Search = () => {
   const query = useQuery();

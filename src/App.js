@@ -10,13 +10,13 @@ import Navbar from "./components/Navbar";
 import { useEffect, useState } from "react";
 import { useAuthentication } from "./hooks/useAuthentication";
 
-// paages
-
+// pages
 import Home from "./pages/Home/Home";
 import About from "./pages/About/About";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import Post from "./pages/Posts/Post";
+import Favorites from "./pages/Favorites/Favorites";
 
 //context
 import { AuthProvider } from "./context/AuthContext";
@@ -50,6 +50,7 @@ function App() {
               <Route path="/about" element={<About />} />
               <Route path="/search" element={<Search />} />
               <Route path="/posts/:id" element={<Post />} />
+              <Route path="/favorites" element={<Favorites />} />
               <Route
                 path="/login"
                 element={!user ? <Login /> : <Navigate to="/" />}

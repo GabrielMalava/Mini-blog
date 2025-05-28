@@ -1,8 +1,56 @@
-# Getting Started with Create React App
+# MiniBlog 📝
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Uma plataforma moderna de blog construída com React e Firebase, oferecendo uma experiência rica de compartilhamento de conteúdo.
 
-## Available Scripts
+## ✨ Funcionalidades
+
+### 📱 Para Usuários
+- **Sistema de Autenticação**
+  - Registro de conta
+  - Login/Logout
+  - Dashboard personalizado
+
+### 📝 Gerenciamento de Posts
+- Criação de posts com suporte a:
+  - Múltiplas imagens (carrossel)
+  - Tags personalizadas
+  - Formatação de texto
+  - Tempo estimado de leitura (calculado automaticamente)
+
+### ❤️ Interação
+- **Sistema de Favoritos**
+  - Marcar/desmarcar posts como favoritos
+  - Página dedicada para posts favoritos
+  - Persistência local dos favoritos
+
+- **Sistema de Avaliação**
+  - Avaliação em estrelas (1-5)
+  - Persistência local das avaliações
+
+### 🔍 Busca e Filtros
+- **Filtros Avançados**
+  - Filtrar por tags
+  - Filtrar por data (hoje, semana, mês, ano)
+  - Filtrar por autor
+  - Busca por palavras-chave
+
+### 🎨 Interface
+- Design responsivo
+- Layout em grid moderno
+- Carrossel de imagens
+- Barra lateral de filtros
+- Compartilhamento de posts
+
+## 🚀 Tecnologias Utilizadas
+
+- **React** - Framework principal
+- **Firebase** - Backend e autenticação
+- **CSS Modules** - Estilização
+- **Context API** - Gerenciamento de estado
+- **Custom Hooks** - Lógica reutilizável
+- **Swiper** - Carrossel de imagens
+
+## 📦 Instalação e Scripts
 
 In the project directory, you can run:
 
@@ -57,14 +105,48 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/a
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
+## 🔧 Configuração do Firebase
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+1. Crie um projeto no [Firebase Console](https://console.firebase.google.com)
+2. Ative o Authentication com email/senha
+3. Configure o Firestore Database
+4. Adicione suas credenciais no arquivo de configuração:
 
-### Deployment
+```javascript
+// src/firebase/config.js
+const firebaseConfig = {
+  apiKey: "sua-api-key",
+  authDomain: "seu-auth-domain",
+  projectId: "seu-project-id",
+  storageBucket: "seu-storage-bucket",
+  messagingSenderId: "seu-messaging-sender-id",
+  appId: "seu-app-id"
+};
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## 📱 Uso
 
-### `npm run build` fails to minify
+1. **Criar uma conta**
+   - Acesse a página de registro
+   - Preencha suas informações
+   - Faça login
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+2. **Criar Posts**
+   - Acesse "Criar Post"
+   - Adicione título, conteúdo e imagens
+   - Use vírgulas para separar tags
+   - Use vírgulas para adicionar múltiplas imagens
+
+3. **Interagir com Posts**
+   - Favorite posts interessantes
+   - Avalie posts com estrelas
+   - Use filtros para encontrar conteúdo
+   - Compartilhe posts com amigos
+
+## 🤝 Contribuição
+
+Contribuições são bem-vindas! Por favor, leia nossas diretrizes de contribuição para começar.
+
+## 📄 Licença
+
+Este projeto está sob a licença MIT.

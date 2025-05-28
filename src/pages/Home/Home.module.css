@@ -2,7 +2,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  padding: 0 2em;
+}
+
+.content {
+  display: flex;
+  gap: 2em;
+  width: 100%;
+  max-width: 1400px;
+  margin: 2em auto;
 }
 
 .search_form {
@@ -32,4 +40,20 @@
 }
 .noposts a {
   paddin: 10px 25px;
+}
+
+.post_list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2em;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+@media (max-width: 680px) {
+  .post_list {
+    grid-template-columns: 1fr;
+  }
 }

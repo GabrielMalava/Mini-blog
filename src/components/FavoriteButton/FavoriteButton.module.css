@@ -1,0 +1,35 @@
+.favorite_btn {
+  background: none;
+  border: none;
+  padding: 0.5em;
+  cursor: pointer;
+  transition: var(--transition);
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.favorite_btn svg {
+  width: 24px;
+  height: 24px;
+  fill: #e5e7eb;
+  transition: var(--transition);
+}
+
+.favorite_btn:hover svg {
+  transform: scale(1.1);
+}
+
+.favorite_btn.active svg {
+  fill: #ef4444;
+  filter: drop-shadow(0 0 2px rgba(239, 68, 68, 0.3));
+}
+
+.favorite_btn:hover {
+  background-color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}

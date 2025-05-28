@@ -1,9 +1,42 @@
-.footer{
-    height:250px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color:#edf3f6;
+.footer {
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(
+    to right,
+    var(--primary-color),
+    var(--secondary-color)
+  );
+  color: #fff;
+  padding: 2em 0;
+  margin-top: 4em;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
 
+.footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(to right, #fff, transparent, #fff);
+}
+
+.footer h3 {
+  font-size: 1.8em;
+  margin-bottom: 0.5em;
+  font-weight: 600;
+}
+
+.footer p {
+  font-size: 1.1em;
+  opacity: 0.9;
+  max-width: 600px;
+  line-height: 1.6;
+  margin: 0 auto;
 }

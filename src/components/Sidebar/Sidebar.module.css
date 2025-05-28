@@ -1,0 +1,80 @@
+.sidebar {
+  width: 250px;
+  background: #fff;
+  padding: 1.5em;
+  border-radius: var(--border-radius);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  height: fit-content;
+}
+
+.filterSection {
+  margin-bottom: 2em;
+}
+
+.filterSection:last-child {
+  margin-bottom: 0;
+}
+
+.filterSection h3 {
+  font-size: 1.1em;
+  color: var(--text-color);
+  margin-bottom: 1em;
+  padding-bottom: 0.5em;
+  border-bottom: 2px solid var(--primary-color);
+}
+
+.tagList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  max-height: 200px;
+  overflow-y: auto;
+  padding-right: 0.5em;
+}
+
+.tagItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  cursor: pointer;
+  padding: 0.3em 0;
+}
+
+.tagName {
+  color: var(--text-color);
+  font-size: 0.9em;
+}
+
+.select {
+  width: 100%;
+  padding: 0.5em;
+  border: 1px solid #ddd;
+  border-radius: var(--border-radius);
+  background-color: #fff;
+  color: var(--text-color);
+  cursor: pointer;
+}
+
+.select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+/* Customizar a scrollbar do tagList */
+.tagList::-webkit-scrollbar {
+  width: 4px;
+}
+
+.tagList::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 2px;
+}
+
+.tagList::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 2px;
+}
+
+.tagList::-webkit-scrollbar-thumb:hover {
+  background: var(--secondary-color);
+}

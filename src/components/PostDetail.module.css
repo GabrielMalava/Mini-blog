@@ -1,39 +1,106 @@
 .post_detail {
-  margin-bottom: 2em;
-  max-width: 500px;
-  margin: 0 auto;
+  background: #fff;
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
-.post_detail img {
+.post_detail:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.image_container {
+  position: relative;
   width: 100%;
+  padding-top: 56.25%; /* 16:9 aspect ratio */
+  overflow: hidden;
+}
+
+.image_container img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.post_detail:hover .image_container img {
+  transform: scale(1.05);
+}
+
+.content {
+  padding: 1.5em;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .post_detail h2 {
-  margin-bottom: 0.4em;
-  font-size: 1.6em;
-  text-align: left;
+  font-size: 1.8em;
+  margin-bottom: 0.5em;
+  color: var(--text-color);
+  line-height: 1.3;
 }
 
 .createdBy {
   font-style: italic;
-  color: #444;
-  font-size: 0.8em;
+  color: #666;
+  font-size: 0.9em;
   margin-bottom: 1em;
-  text-align: left;
+  display: flex;
+  align-items: center;
+}
+
+.createdBy::before {
+  content: "";
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  background-color: var(--primary-color);
+  border-radius: 50%;
+  margin-right: 0.5em;
 }
 
 .tags {
   display: flex;
-  justify-content: flex-start;
-  gap: 1em;
-  margin: 1.2em 0;
+  flex-wrap: wrap;
+  gap: 0.5em;
+  margin: 1em 0;
 }
 
 .tags p {
-  margin-right: 0.5em;
+  margin: 0;
+  background-color: var(--primary-color);
+  color: #fff;
+  padding: 0.3em 0.8em;
+  border-radius: 20px;
   font-size: 0.9em;
+  transition: all 0.2s ease;
+}
+
+.tags p:hover {
+  transform: scale(1.05);
+  background-color: var(--secondary-color);
 }
 
 .tags span {
-  font-weight: bold;
+  font-weight: 500;
+}
+
+.excerpt {
+  color: #666;
+  margin: 1em 0;
+  line-height: 1.6;
+}
+
+.btn {
+  margin-top: 1em;
 }

@@ -7,7 +7,7 @@ import { useInsertDocument } from "../../hooks/useInsertDocument";
 
 const Createpost = () => {
   const [title, setTitle] = useState("");
-  const [image, setImage] = useState("");
+  const [images, setImages] = useState("");
   const [body, setBody] = useState("");
   const [tags, setTags] = useState("");
   const [formError, setFormError] = useState("");
@@ -16,33 +16,47 @@ const Createpost = () => {
 
   const { insertDocument, response } = useInsertDocument("posts");
   const navigate = useNavigate();
-
   const handleSubmit = (e) => {
     e.preventDefault();
     setFormError("");
 
-    //validate image url
-    try {
-      new URL(image);
-    } catch (error) {
-      setFormError("A imagem precisa ser uma URL.");
+    // Parse and validate image URLs
+    const imageUrls = images
+      .split(",")
+      .map((url) => url.trim())
+      .filter((url) => url);
+
+    if (imageUrls.length === 0) {
+      setFormError("Insira pelo menos uma URL de imagem.");
       return;
+    }
+
+    // Validate each image URL
+    for (const url of imageUrls) {
+      try {
+        new URL(url);
+      } catch (error) {
+        setFormError("Uma ou mais URLs de imagem são inválidas.");
+        return;
+      }
     }
 
     // checar todos os valores
-    if (!title || !image || !tags || !body) {
+    if (!title || !tags || !body) {
       setFormError("Por favor, preencha todos os campos!");
       return;
-    }
-
-    // Criar o array de tags antes de enviar
+    }    // Criar o array de tags antes de enviar
     const tagsArray = tags.split(",").map((tag) => tag.trim().toLowerCase());
+
+    // Use a primeira imagem como imagem principal e as demais como adicionais
+    const [mainImage, ...additionalImages] = imageUrls;
 
     insertDocument({
       title,
-      image,
+      image: mainImage,
+      additionalImages,
       body,
-      tagsArray,
+      tags: tagsArray,  // Corrigido: agora é 'tags' em vez de 'tagsArray'
       uid: user.uid,
       createdBy: user.displayName,
     });
@@ -68,14 +82,15 @@ const Createpost = () => {
           />
         </label>
         <label>
-          <span>Url da imagem:</span>
+          {" "}
+          <span>URLs das imagens:</span>
           <input
             type="text"
-            name="image"
+            name="images"
             required
-            placeholder="Insira uma imagem que representa seu post "
-            onChange={(e) => setImage(e.target.value)}
-            value={image}
+            placeholder="Insira as URLs das imagens separadas por vírgula"
+            onChange={(e) => setImages(e.target.value)}
+            value={images}
           />
         </label>
         <label>
