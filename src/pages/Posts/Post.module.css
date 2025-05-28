@@ -144,6 +144,27 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+.delete_btn {
+  background-color: var(--danger-color);
+  color: #fff;
+  border: none;
+  padding: 0.8em 1.5em;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.9em;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  margin: 2em auto;
+}
+
+.delete_btn:hover {
+  background-color: #dc2626;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
 .image_carousel {
   margin: 2em 0;
   border-radius: var(--border-radius);

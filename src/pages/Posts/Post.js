@@ -23,8 +23,16 @@ const Post = () => {
   const [isFavorite, setIsFavorite] = useState(false);
   const [readingTime, setReadingTime] = useState(0);
   const { user } = useAuthValue();
-  const { deleteDocument } = useDeleteDocument("posts");
   const navigate = useNavigate();
+  const { deleteDocument } = useDeleteDocument("posts");
+
+  const handleDelete = async () => {
+    if (window.confirm("Tem certeza que deseja excluir este post?")) {
+      await deleteDocument(id);
+      navigate("/");
+    }
+  };
+
   // Efeito para carregar rating e favoritos
   useEffect(() => {
     // Recuperar rating do localStorage
@@ -62,11 +70,6 @@ const Post = () => {
 
     // Disparar evento customizado para notificar mudanças
     window.dispatchEvent(new Event("favoritesChanged"));
-  };
-
-  const handleDelete = () => {
-    deleteDocument(post.id);
-    navigate("/");
   };
 
   return (
@@ -149,6 +152,11 @@ const Post = () => {
                     (paragraph, i) => paragraph && <p key={i}>{paragraph}</p>
                   )}
             </div>
+            {user && user.uid === post.uid && (
+              <button onClick={handleDelete} className={styles.delete_btn}>
+                Excluir Post
+              </button>
+            )}
           </div>
           <div className={styles.share_section}>
             <h3>Compartilhe este post</h3>
@@ -165,10 +173,7 @@ const Post = () => {
           </div>
           {user && user.uid === post.createdBy && (
             <div className={styles.admin_section}>
-              <button
-                className={styles.delete_button}
-                onClick={handleDelete}
-              >
+              <button className={styles.delete_button} onClick={handleDelete}>
                 Deletar Post
               </button>
             </div>
