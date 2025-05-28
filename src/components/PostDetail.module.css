@@ -1,0 +1,39 @@
+.post_detail {
+  margin-bottom: 2em;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.post_detail img {
+  width: 100%;
+}
+
+.post_detail h2 {
+  margin-bottom: 0.4em;
+  font-size: 1.6em;
+  text-align: left;
+}
+
+.createdBy {
+  font-style: italic;
+  color: #444;
+  font-size: 0.8em;
+  margin-bottom: 1em;
+  text-align: left;
+}
+
+.tags {
+  display: flex;
+  justify-content: flex-start;
+  gap: 1em;
+  margin: 1.2em 0;
+}
+
+.tags p {
+  margin-right: 0.5em;
+  font-size: 0.9em;
+}
+
+.tags span {
+  font-weight: bold;
+}

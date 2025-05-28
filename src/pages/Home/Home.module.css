@@ -6,16 +6,22 @@
 }
 
 .search_form {
-  max-width: 100%;
-  width: 60%;
+  max-width: 500px;
+  width: 100%;
+  margin: 0 auto;
   display: flex;
-  justify-content: center;
+  align-items: flex-end;
+  gap: 10px;
   margin-bottom: 2em;
 }
 
 .search_form input {
-  margin-right: 10px;
-  width: 50%;
+  flex: 1;
+  border-radius: 0;
+}
+
+.search_form button {
+  border-radius: 0;
 }
 
 .noposts {

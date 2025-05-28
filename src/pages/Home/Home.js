@@ -2,7 +2,7 @@
 import styles from "./Home.module.css";
 
 // hooks
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useState } from "react";
 import { useFetchDocuments } from "../../hooks/useFetchDocuments";
 
@@ -13,21 +13,29 @@ const Home = () => {
   const [query, setQuery] = useState("");
   const { documents: posts, loading } = useFetchDocuments("posts");
 
+  const navigate = useNavigate();
+
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (query) {
+      return navigate(`/search?q=${query}`);
+    }
   };
+
   return (
-    <div>
+    <div className={styles.home}>
       <h1>Veja os nossos posts mais recentes</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className={styles.search_form}>
         <input
           type="text"
-          placeholder="Ou busque por tags..."
+          placeholder="Busque por tags..."
           onChange={(e) => setQuery(e.target.value)}
+          value={query}
         />
         <button className="btn btn-dark">Pesquisar</button>
       </form>
-      <div>
+      <div className="post-list">
         {loading && <p>Carregando...</p>}
         {posts && posts.map((post) => <PostDetail key={post.id} post={post} />)}
         {posts && posts.length === 0 && (
@@ -38,7 +46,6 @@ const Home = () => {
             </Link>
           </div>
         )}
-        ;
       </div>
     </div>
   );
