@@ -7,27 +7,43 @@ import { useInsertDocument } from "../../hooks/useInsertDocument";
 
 const Createpost = () => {
   const [title, setTitle] = useState("");
-  const [images, setImages] = useState("");
+  const [images, setImages] = useState([""]);
   const [body, setBody] = useState("");
   const [tags, setTags] = useState("");
   const [formError, setFormError] = useState("");
 
   const { user } = useAuthValue();
-
   const { insertDocument, response } = useInsertDocument("posts");
   const navigate = useNavigate();
+
+  const handleAddImageField = () => {
+    setImages([...images, ""]);
+  };
+
+  const handleImageChange = (index, value) => {
+    const newImages = [...images];
+    newImages[index] = value;
+    setImages(newImages);
+  };
+
+  const handleRemoveImageField = (index) => {
+    if (images.length > 1) {
+      const newImages = images.filter((_, i) => i !== index);
+      setImages(newImages);
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setFormError("");
-    const imageUrls = images
-      .split(",")
-      .map((url) => url.trim())
-      .filter((url) => url);
+
+    const imageUrls = images.filter((url) => url.trim());
 
     if (imageUrls.length === 0) {
       setFormError("Insira pelo menos uma URL de imagem.");
       return;
     }
+
     for (const url of imageUrls) {
       try {
         new URL(url);
@@ -36,10 +52,12 @@ const Createpost = () => {
         return;
       }
     }
+
     if (!title || !tags || !body) {
       setFormError("Por favor, preencha todos os campos!");
       return;
     }
+
     const tagsArray = tags.split(",").map((tag) => tag.trim().toLowerCase());
     const [mainImage, ...additionalImages] = imageUrls;
 
@@ -52,6 +70,7 @@ const Createpost = () => {
       uid: user.uid,
       createdBy: user.displayName,
     });
+
     navigate("/");
   };
 
@@ -66,23 +85,40 @@ const Createpost = () => {
             type="text"
             name="title"
             required
-            placeholder="Pense nem um bom título"
+            placeholder="Pense em um bom título"
             onChange={(e) => setTitle(e.target.value)}
             value={title}
           />
         </label>
-        <label>
-          {" "}
+        <div className={styles.image_fields}>
           <span>URLs das imagens:</span>
-          <input
-            type="text"
-            name="images"
-            required
-            placeholder="Insira as URLs das imagens separadas por vírgula"
-            onChange={(e) => setImages(e.target.value)}
-            value={images}
-          />
-        </label>
+          {images.map((image, index) => (
+            <div key={index} className={styles.image_field}>
+              <input
+                type="text"
+                placeholder="Insira a URL da imagem"
+                value={image}
+                onChange={(e) => handleImageChange(index, e.target.value)}
+              />
+              {index > 0 && (
+                <button
+                  type="button"
+                  onClick={() => handleRemoveImageField(index)}
+                  className={styles.remove_btn}
+                >
+                  Remover
+                </button>
+              )}
+            </div>
+          ))}
+          <button
+            type="button"
+            onClick={handleAddImageField}
+            className={styles.add_btn}
+          >
+            Adicionar mais uma imagem
+          </button>
+        </div>
         <label>
           <span>Conteúdo:</span>
           <textarea
@@ -99,7 +135,7 @@ const Createpost = () => {
             type="text"
             name="tags"
             required
-            placeholder="Insira as tags separadas por vírgula "
+            placeholder="Insira as tags separadas por vírgula"
             onChange={(e) => setTags(e.target.value)}
             value={tags}
           />
@@ -110,8 +146,8 @@ const Createpost = () => {
             Aguarde...
           </button>
         )}
-        {response.error && <p className="error">{response.error} </p>}
-        {formError && <p className="error">{formError} </p>}
+        {response.error && <p className="error">{response.error}</p>}
+        {formError && <p className="error">{formError}</p>}
       </form>
     </div>
   );
