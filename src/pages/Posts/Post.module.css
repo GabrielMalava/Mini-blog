@@ -194,3 +194,53 @@
 :global(.swiper-pagination-bullet-active) {
   background-color: var(--primary-color) !important;
 }
+
+@media (max-width: 768px) {
+  .post_container {
+    padding: 1em;
+  }
+
+  .post_header h1 {
+    font-size: 1.8em;
+  }
+
+  .post_info {
+    flex-direction: column;
+    gap: 1em;
+  }
+
+  .author_info {
+    flex-direction: column;
+    gap: 0.5em;
+    align-items: flex-start;
+  }
+
+  .interactions {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .share_buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .share_button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .post_container {
+    padding: 0.8em;
+  }
+
+  .post_header h1 {
+    font-size: 1.5em;
+  }
+
+  .tags {
+    justify-content: center;
+  }
+}

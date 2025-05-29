@@ -22,8 +22,12 @@ const Post = () => {
   const { user } = useAuthValue();
   const navigate = useNavigate();
   const { deleteDocument } = useDeleteDocument("posts");
-
   const handleDelete = async () => {
+    if (user.uid !== post.uid) {
+      alert("Você não tem permissão para excluir este post!");
+      return;
+    }
+
     if (window.confirm("Tem certeza que deseja excluir este post?")) {
       await deleteDocument(id);
       navigate("/");
@@ -144,12 +148,12 @@ const Post = () => {
                   .map(
                     (paragraph, i) => paragraph && <p key={i}>{paragraph}</p>
                   )}
-            </div>
-            {user && user.uid === post.uid && (
+            </div>{" "}
+            {user && user.uid === post.uid ? (
               <button onClick={handleDelete} className={styles.delete_btn}>
                 Excluir Post
               </button>
-            )}
+            ) : null}
           </div>
           <div className={styles.share_section}>
             <h3>Compartilhe este post</h3>
@@ -164,13 +168,6 @@ const Post = () => {
               </button>
             </div>
           </div>
-          {user && user.uid === post.createdBy && (
-            <div className={styles.admin_section}>
-              <button className={styles.delete_button} onClick={handleDelete}>
-                Deletar Post
-              </button>
-            </div>
-          )}
         </>
       )}
     </div>

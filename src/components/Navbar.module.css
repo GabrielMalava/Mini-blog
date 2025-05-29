@@ -77,3 +77,75 @@
   background-color: var(--primary-color);
   color: #fff !important;
 }
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 1em;
+    position: relative;
+  }
+
+  .links_list {
+    display: none; /* Esconde por padrão */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 1em;
+    gap: 0.5em;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+  }
+
+  .links_list.active {
+    display: flex; /* Mostra quando tiver a classe active */
+  }
+
+  .menu_button {
+    background: none;
+    border: none;
+    padding: 0.5em;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .menu_button span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background-color: var(--text-color);
+    transition: var(--transition);
+  }
+
+  .menu_button.active span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  .menu_button.active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .menu_button.active span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  .links_list li {
+    width: 100%;
+    text-align: center;
+  }
+
+  .links_list li a {
+    display: block;
+    padding: 0.8em;
+    width: 100%;
+  }
+
+  .brand {
+    font-size: 1.4em;
+  }
+}

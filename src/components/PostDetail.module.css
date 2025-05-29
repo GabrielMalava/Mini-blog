@@ -104,3 +104,36 @@
 .btn {
   margin-top: 1em;
 }
+
+@media (max-width: 768px) {
+  .post_detail h2 {
+    font-size: 1.5em;
+  }
+
+  .content {
+    padding: 1em;
+  }
+
+  .tags {
+    justify-content: center;
+  }
+
+  .excerpt {
+    font-size: 0.9em;
+  }
+
+  .btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .post_detail:hover {
+    transform: none;
+  }
+
+  .post_detail h2 {
+    font-size: 1.3em;
+  }
+}

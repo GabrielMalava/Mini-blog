@@ -101,3 +101,36 @@
 .remove_btn:hover {
   background-color: #dc2626;
 }
+
+@media (max-width: 768px) {
+  .create_post form {
+    max-width: 100%;
+    padding: 1.5em;
+  }
+
+  .create_post h2 {
+    font-size: 1.8em;
+  }
+
+  .image_fields {
+    gap: 0.8em;
+  }
+
+  .image_field {
+    flex-direction: column;
+    gap: 0.5em;
+  }
+
+  .image_field input {
+    width: 100%;
+  }
+
+  .remove_btn {
+    width: 100%;
+  }
+
+  .add_btn {
+    width: 100%;
+    margin-top: 1em;
+  }
+}

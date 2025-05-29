@@ -5,6 +5,8 @@
   border-radius: var(--border-radius);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   height: fit-content;
+  position: sticky;
+  top: 90px; /* Ajustado para ficar abaixo da navbar */
 }
 
 .filterSection {
@@ -77,4 +79,52 @@
 
 .tagList::-webkit-scrollbar-thumb:hover {
   background: var(--secondary-color);
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    margin-bottom: 2em;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    position: static; /* Remove sticky no mobile */
+    height: auto;
+    padding: 1em;
+  }
+
+  .filterSection {
+    margin-bottom: 1.5em;
+  }
+
+  .tagList {
+    max-height: none; /* Remove scroll fixo no mobile */
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 0.8em;
+    padding: 0.5em;
+  }
+
+  .tagItem {
+    justify-content: flex-start;
+    background-color: #f8f9fa;
+    padding: 0.8em;
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+  }
+
+  .tagItem:hover {
+    background-color: var(--primary-color);
+    color: #fff;
+  }
+
+  .tagItem:hover .tagName {
+    color: #fff;
+  }
+
+  .select {
+    padding: 1em;
+    background-color: #f8f9fa;
+    font-size: 1em;
+  }
 }
