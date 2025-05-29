@@ -23,28 +23,8 @@ const Post = () => {
   const { user } = useAuthValue();
   const navigate = useNavigate();
   const { deleteDocument } = useDeleteDocuments("posts");
-  const handleDelete = async () => {
-    if (user.uid !== post.uid) {
-      alert("Você não tem permissão para excluir este post!");
-      return;
-    }
 
-    if (window.confirm("Tem certeza que deseja excluir este post?")) {
-      await deleteDocument(id);
-      navigate("/");
-    }
-  };
-  useEffect(() => {
-    const savedRating = localStorage.getItem(`rating_${id}`);
-    if (savedRating) {
-      setRating(parseInt(savedRating));
-    }
-
-    const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-    setIsFavorite(favorites.includes(id));
-  }, [id]);
-
-  // Efeito separado para calcular tempo de leitura
+  // Calculate reading time when post changes
   useEffect(() => {
     if (post?.body) {
       const words = post.body.trim().split(/\s+/).length;
@@ -57,6 +37,7 @@ const Post = () => {
     setRating(value);
     localStorage.setItem(`rating_${id}`, value.toString());
   };
+
   const handleFavoriteToggle = (postId, favState) => {
     const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
     let newFavorites = favState
@@ -68,6 +49,11 @@ const Post = () => {
 
     // Disparar evento customizado para notificar mudanças
     window.dispatchEvent(new Event("favoritesChanged"));
+  };
+
+  const handleDelete = async () => {
+    await deleteDocument(id);
+    navigate("/");
   };
 
   return (

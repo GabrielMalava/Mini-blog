@@ -80,10 +80,10 @@ const Home = () => {
       <div className={styles.content}>
         <Sidebar posts={posts} onFilterChange={handleFilters} />
         <div className={styles.post_list}>
-          {loading && <p>Carregando...</p>}
+          {loading && <p>Carregando...</p>}{" "}
           {filteredPosts &&
             filteredPosts.map((post) => (
-              <PostDetail key={post.id} post={post} />
+              <PostDetail key={post.id} post={post} showEditButton={false} />
             ))}
           {filteredPosts && filteredPosts.length === 0 && (
             <div className={styles.noposts}>

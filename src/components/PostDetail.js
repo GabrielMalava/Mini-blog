@@ -5,7 +5,11 @@ import EditButton from "./EditButton/EditButton";
 import { useState, useEffect } from "react";
 import { useAuthValue } from "../context/AuthContext";
 
-const PostDetail = ({ post, showFavoriteButton = true }) => {
+const PostDetail = ({
+  post,
+  showFavoriteButton = true,
+  showEditButton = false,
+}) => {
   const [isFavorite, setIsFavorite] = useState(false);
   const { user } = useAuthValue();
 
@@ -33,7 +37,7 @@ const PostDetail = ({ post, showFavoriteButton = true }) => {
   };
   return (
     <div className={styles.post_detail}>
-      {user && user.uid === post.uid && (
+      {showEditButton && user && user.uid === post.uid && (
         <div className={styles.edit_button_container}>
           <EditButton postId={post.id} />
         </div>
