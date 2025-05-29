@@ -1,20 +1,40 @@
-import styles from "./Createpost.module.css";
-
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { useAuthValue } from "../../context/AuthContext";
-import { useInsertDocuments } from "../../hooks/useInsertDocuments";
+import { useFetchDocuments } from "../../hooks/useFetchDocuments";
+import { useUpdateDocuments } from "../../hooks/useUpdateDocuments";
+import styles from "./EditPost.module.css";
 
-const Createpost = () => {
+const EditPost = () => {
+  const { id } = useParams();
+  const { user } = useAuthValue();
+  const { documents: posts } = useFetchDocuments("posts");
+  const { updateDocument, response } = useUpdateDocuments("posts");
+  const navigate = useNavigate();
+
   const [title, setTitle] = useState("");
   const [images, setImages] = useState([""]);
   const [body, setBody] = useState("");
   const [tags, setTags] = useState("");
   const [formError, setFormError] = useState("");
 
-  const { user } = useAuthValue();
-  const { insertDocument, response } = useInsertDocuments("posts");
-  const navigate = useNavigate();
+  useEffect(() => {
+    if (posts) {
+      const post = posts.find((post) => post.id === id);
+
+      if (post) {
+        if (post.uid !== user.uid) {
+          navigate("/");
+          return;
+        }
+
+        setTitle(post.title);
+        setBody(post.body);
+        setTags(post.tags.join(", "));
+        setImages([post.image, ...(post.additionalImages || [])]);
+      }
+    }
+  }, [posts, id, user.uid, navigate]);
 
   const handleAddImageField = () => {
     setImages([...images, ""]);
@@ -32,8 +52,7 @@ const Createpost = () => {
       setImages(newImages);
     }
   };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setFormError("");
 
@@ -61,23 +80,29 @@ const Createpost = () => {
     const tagsArray = tags.split(",").map((tag) => tag.trim().toLowerCase());
     const [mainImage, ...additionalImages] = imageUrls;
 
-    insertDocument({
+    const data = {
       title,
       image: mainImage,
       additionalImages,
       body,
       tags: tagsArray,
-      uid: user.uid,
-      createdBy: user.displayName,
-    });
+    };
+    try {
+      await updateDocument(id, data);
 
-    navigate("/");
+      // Redirect after post is updated
+      if (!response.error) {
+        navigate(`/posts/${id}`);
+      }
+    } catch (error) {
+      setFormError("Erro ao atualizar o post. Tente novamente.");
+    }
   };
 
   return (
-    <div className={styles.create_post}>
-      <h2>Criar post</h2>
-      <p>Escreva sobre o que quiser compartilhe o seu conhecimento!</p>
+    <div className={styles.edit_post}>
+      <h2>Editando post</h2>
+      <p>Altere os dados do post como desejar</p>
       <form onSubmit={handleSubmit}>
         <label>
           <span>Título:</span>
@@ -140,7 +165,7 @@ const Createpost = () => {
             value={tags}
           />
         </label>
-        {!response.loading && <button className="btn">Cadastrar</button>}
+        {!response.loading && <button className="btn">Atualizar</button>}
         {response.loading && (
           <button className="btn" disabled>
             Aguarde...
@@ -153,4 +178,4 @@ const Createpost = () => {
   );
 };
 
-export default Createpost;
+export default EditPost;

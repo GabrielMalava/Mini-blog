@@ -1,6 +1,7 @@
 import styles from "./PostDetail.module.css";
 import { Link } from "react-router-dom";
 import FavoriteButton from "./FavoriteButton/FavoriteButton";
+import EditButton from "./EditButton/EditButton";
 import { useState, useEffect } from "react";
 import { useAuthValue } from "../context/AuthContext";
 
@@ -30,18 +31,23 @@ const PostDetail = ({ post, showFavoriteButton = true }) => {
 
     window.dispatchEvent(new Event("favoritesChanged"));
   };
-
   return (
     <div className={styles.post_detail}>
-      {" "}
+      {user && user.uid === post.uid && (
+        <div className={styles.edit_button_container}>
+          <EditButton postId={post.id} />
+        </div>
+      )}
       <div className={styles.image_container}>
         <img src={post.image} alt={post.title} />
         {user && (
-          <FavoriteButton
-            initialState={isFavorite}
-            onToggle={(favState) => handleFavoriteToggle(post.id, favState)}
-            postId={post.id}
-          />
+          <div className={styles.button_container}>
+            <FavoriteButton
+              initialState={isFavorite}
+              onToggle={(favState) => handleFavoriteToggle(post.id, favState)}
+              postId={post.id}
+            />
+          </div>
         )}
       </div>
       <div className={styles.content}>

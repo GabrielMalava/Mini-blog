@@ -17,6 +17,7 @@ import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import Post from "./pages/Posts/Post";
 import Favorites from "./pages/Favorites/Favorites";
+import EditPost from "./pages/EditPost/EditPost";
 
 //context
 import { AuthProvider } from "./context/AuthContext";
@@ -32,7 +33,7 @@ function App() {
     onAuthStateChanged(auth, (user) => {
       setUser(user);
     });
-  });
+  }, [auth]);
 
   const loadingUser = user === undefined;
   if (loadingUser) {
@@ -69,6 +70,10 @@ function App() {
               <Route
                 path="/dashboard"
                 element={user ? <Dashboard /> : <Navigate to="/login" />}
+              />
+              <Route
+                path="/posts/edit/:id"
+                element={user ? <EditPost /> : <Navigate to="/login" />}
               />
             </Routes>
           </div>

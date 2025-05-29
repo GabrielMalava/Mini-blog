@@ -51,8 +51,8 @@
 
 .interactions {
   display: flex;
-  gap: 2em;
   align-items: center;
+  gap: 1em;
 }
 
 .featured_image {
@@ -193,6 +193,17 @@
 
 :global(.swiper-pagination-bullet-active) {
   background-color: var(--primary-color) !important;
+}
+
+.post_actions {
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+  margin: 2em 0;
+}
+
+.post_actions button {
+  min-width: 120px;
 }
 
 @media (max-width: 768px) {

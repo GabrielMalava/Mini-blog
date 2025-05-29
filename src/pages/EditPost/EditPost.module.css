@@ -1,0 +1,136 @@
+.edit_post {
+  text-align: center;
+}
+
+.edit_post h2 {
+  font-size: 2.2em;
+}
+
+.edit_post p {
+  color: #aaa;
+  margin: 2em 0;
+}
+
+.edit_post form {
+  max-width: 40%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.edit_post form label {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1em;
+}
+
+.edit_post form label span {
+  margin-bottom: 0.5em;
+  font-weight: bold;
+  text-align: left;
+}
+
+.edit_post form input,
+.edit_post form textarea {
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  padding: 0.8em 0;
+  background-color: transparent;
+}
+
+.edit_post form textarea {
+  height: 160px;
+}
+
+.image_fields {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  margin-bottom: 1em;
+  text-align: left;
+}
+
+.image_fields span {
+  font-weight: bold;
+  margin-bottom: 0.5em;
+}
+
+.image_field {
+  display: flex;
+  gap: 1em;
+  align-items: center;
+}
+
+.image_field input {
+  flex: 1;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  padding: 0.8em 0;
+  background-color: transparent;
+}
+
+.add_btn {
+  background-color: var(--primary-color);
+  color: #fff;
+  border: none;
+  border-radius: var(--border-radius);
+  padding: 0.6em 1.2em;
+  font-size: 0.9em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  align-self: flex-start;
+  margin-top: 0.5em;
+}
+
+.remove_btn {
+  background-color: var(--danger-color);
+  color: #fff;
+  border: none;
+  border-radius: var(--border-radius);
+  padding: 0.4em 0.8em;
+  font-size: 0.8em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add_btn:hover {
+  background-color: var(--secondary-color);
+}
+
+.remove_btn:hover {
+  background-color: #dc2626;
+}
+
+@media (max-width: 768px) {
+  .edit_post form {
+    max-width: 100%;
+    padding: 1.5em;
+  }
+
+  .edit_post h2 {
+    font-size: 1.8em;
+  }
+
+  .image_fields {
+    gap: 0.8em;
+  }
+
+  .image_field {
+    flex-direction: column;
+    gap: 0.5em;
+  }
+
+  .image_field input {
+    width: 100%;
+  }
+
+  .remove_btn {
+    width: 100%;
+  }
+
+  .add_btn {
+    width: 100%;
+    margin-top: 1em;
+  }
+}

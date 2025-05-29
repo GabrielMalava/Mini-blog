@@ -5,9 +5,10 @@ import { useState, useEffect } from "react";
 import StarRating from "../../components/StarRating/StarRating";
 import FavoriteButton from "../../components/FavoriteButton/FavoriteButton";
 import { useAuthValue } from "../../context/AuthContext";
-import { useDeleteDocument } from "../../hooks/useDeleteDocument";
+import { useDeleteDocuments } from "../../hooks/useDeleteDocuments";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import EditButton from "../../components/EditButton/EditButton";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -21,7 +22,7 @@ const Post = () => {
   const [readingTime, setReadingTime] = useState(0);
   const { user } = useAuthValue();
   const navigate = useNavigate();
-  const { deleteDocument } = useDeleteDocument("posts");
+  const { deleteDocument } = useDeleteDocuments("posts");
   const handleDelete = async () => {
     if (user.uid !== post.uid) {
       alert("Você não tem permissão para excluir este post!");
@@ -81,7 +82,7 @@ const Post = () => {
                 <p className={styles.reading_time}>
                   {readingTime} min de leitura
                 </p>
-              </div>
+              </div>{" "}
               <div className={styles.interactions}>
                 <StarRating
                   initialRating={rating}
@@ -92,6 +93,7 @@ const Post = () => {
                   onToggle={(favState) => handleFavoriteToggle(id, favState)}
                   postId={id}
                 />
+                {user && user.uid === post.uid && <EditButton postId={id} />}
               </div>
             </div>
           </div>{" "}
@@ -149,11 +151,13 @@ const Post = () => {
                     (paragraph, i) => paragraph && <p key={i}>{paragraph}</p>
                   )}
             </div>{" "}
-            {user && user.uid === post.uid ? (
-              <button onClick={handleDelete} className={styles.delete_btn}>
-                Excluir Post
-              </button>
-            ) : null}
+            {user && user.uid === post.uid && (
+              <div className={styles.post_actions}>
+                <button onClick={handleDelete} className={styles.delete_btn}>
+                  Excluir Post
+                </button>
+              </div>
+            )}
           </div>
           <div className={styles.share_section}>
             <h3>Compartilhe este post</h3>

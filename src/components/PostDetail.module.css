@@ -105,6 +105,23 @@
   margin-top: 1em;
 }
 
+.button_container {
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  display: flex;
+  gap: 0.5em;
+  z-index: 2;
+}
+
+.edit_button_container {
+  position: absolute;
+  left: 1em;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+}
+
 @media (max-width: 768px) {
   .post_detail h2 {
     font-size: 1.5em;

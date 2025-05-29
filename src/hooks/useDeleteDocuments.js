@@ -20,7 +20,7 @@ const deleteReducer = (state, action) => {
   }
 };
 
-export const useDeleteDocument = (docCollection) => {
+export const useDeleteDocuments = (docCollection) => {
   const [response, dispatch] = useReducer(deleteReducer, initialState);
   const [cancelled, setCancelled] = useState(false);
 
@@ -34,13 +34,17 @@ export const useDeleteDocument = (docCollection) => {
     checkCancelBeforeDispatch({ type: "LOADING" });
 
     try {
-      const deletedDocument = await deleteDoc(doc(db, docCollection, id));
+      const docRef = doc(db, docCollection, id);
+      await deleteDoc(docRef);
+
       checkCancelBeforeDispatch({
         type: "DELETED_DOC",
-        payload: deletedDocument,
       });
     } catch (error) {
-      checkCancelBeforeDispatch({ type: "ERROR", payload: error.message });
+      checkCancelBeforeDispatch({
+        type: "ERROR",
+        payload: error.message,
+      });
     }
   };
 

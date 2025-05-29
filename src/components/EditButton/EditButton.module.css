@@ -1,0 +1,28 @@
+.edit_button {
+  background: var(--primary-color);
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  font-size: 1.2em;
+  width: 40px;
+  height: 40px;
+  padding: 0.5em;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.edit_button:hover {
+  background-color: var(--secondary-color);
+  color: #fff;
+  transform: translateY(-2px) scale(1.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.edit_button span {
+  font-size: 0.9em;
+}

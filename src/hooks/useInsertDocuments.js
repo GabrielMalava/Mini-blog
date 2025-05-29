@@ -20,12 +20,10 @@ const insertReducer = (state, action) => {
   }
 };
 
-export const useInsertDocument = (docCollection) => {
+export const useInsertDocuments = (docCollection) => {
   const [response, dispatch] = useReducer(insertReducer, initialState);
-
-  // deal with memory leak
-
   const [cancelled, setCancelled] = useState(false);
+
   const checkCancelBeforeDispatch = (action) => {
     if (!cancelled) {
       dispatch(action);
@@ -33,26 +31,24 @@ export const useInsertDocument = (docCollection) => {
   };
 
   const insertDocument = async (document) => {
-    checkCancelBeforeDispatch({
-      type: "LOADING",
-      payload: insertDocument,
-    });
+    checkCancelBeforeDispatch({ type: "LOADING" });
 
     try {
       const newDocument = { ...document, createdAt: Timestamp.now() };
 
-      const insertDocument = await addDoc(
+      const insertedDocument = await addDoc(
         collection(db, docCollection),
         newDocument
       );
+
       checkCancelBeforeDispatch({
-        type: "INSERTED_DOCUMENT",
-        payload: insertDocument,
+        type: "INSERTED_DOC",
+        payload: insertedDocument,
       });
     } catch (error) {
       checkCancelBeforeDispatch({
         type: "ERROR",
-        payload: insertDocument,
+        payload: error.message,
       });
     }
   };
